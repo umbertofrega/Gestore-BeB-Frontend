@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { Room } from '../models/room.model';
-import { Observable } from 'rxjs';
-import {RoomType} from '../models/enums/room-types.model';
+import {Room} from '../models/room.model';
+import {Observable} from 'rxjs';
+import {RoomState, RoomType} from '../models/enums/room-types.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomService {
@@ -44,8 +44,13 @@ export class RoomService {
 
 
   updateRoom(roomNumber : number, room : Room) : Observable<Room>{
-    return this.http.put<Room>(`${this.url}/${roomNumber}/state`, room)
+    return this.http.put<Room>(`${this.url}/${roomNumber}`, room)
   }
+
+  updateRoomState(roomNumber : number, state : RoomState) : Observable<Room>{
+    return this.http.put<Room>(`${this.url}/${roomNumber}/state`, state)
+  }
+
 
   deleteRoom(roomNumber :  number) : Observable<Room>{
     return this.http.delete<Room>(`${this.url}/${roomNumber}`)

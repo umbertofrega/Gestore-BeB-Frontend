@@ -1,6 +1,6 @@
-import { Room } from './room.model';
-import { Guest } from './guest.model';
-import { PaymentStatus } from './enums/payment-status.model';
+import {Room} from './room.model';
+import {Guest} from './guest.model';
+import {PaymentStatus} from './enums/payment-status.model';
 
 export interface Reservation {
   id: number;

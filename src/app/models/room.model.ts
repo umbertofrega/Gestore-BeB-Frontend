@@ -1,5 +1,4 @@
-import { RoomType } from './enums/room-types.model';
-import { RoomState } from './enums/room-types.model';
+import {RoomState, RoomType} from './enums/room-types.model';
 
 export interface Room {
   number: number;

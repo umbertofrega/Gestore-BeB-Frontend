@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {Reservation} from '../models/reservation.model';
 import {RoomType} from '../models/enums/room-types.model';
 import {PaymentStatus} from '../models/enums/payment-status.model';
@@ -32,7 +32,7 @@ export class ReservationService {
 
 
   updateStatus(status : PaymentStatus, reservationId : number) : Observable<Reservation>{
-    return this.http.post<Reservation>(`${this.url}/${reservationId}`, status)
+    return this.http.put<Reservation>(`${this.url}/${reservationId}`, status)
   }
 
   deleteReservation(reservationId : number): Observable<Reservation>{
