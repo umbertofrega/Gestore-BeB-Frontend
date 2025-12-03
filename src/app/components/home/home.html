@@ -1,53 +1,53 @@
 <div class="container">
-  <h2>Cerca la tua stanza</h2>
+<h2>Cerca la tua stanza</h2>
 
-  <form [formGroup]="searchForm" (ngSubmit)="search()" class="search-form">
+<form [formGroup]="searchForm" (ngSubmit)="search()" class="search-form">
 
-    <div class="form-group">
-      <label>Arrivo:</label>
-      <input type="date" formControlName="checkin">
-    </div>
+  <div class="form-group">
+    <label>Arrivo:</label>
+    <input type="date" formControlName="checkin">
+  </div>
 
-    <div class="form-group">
-      <label>Partenza:</label>
-      <input type="date" formControlName="checkout">
-    </div>
+  <div class="form-group">
+    <label>Partenza:</label>
+    <input type="date" formControlName="checkout">
+  </div>
 
-    <div class="form-group">
-      <label>Tipo:</label>
-      <select formControlName="type">
-        <option [ngValue]="null">Tutti</option>
-        <option *ngFor="let type of roomTypes" [value]="type">{{ type }}</option>
-      </select>
-    </div>
+  <div class="form-group">
+    <label>Tipo:</label>
+    <select formControlName="type">
+      <option [ngValue]="null">Tutti</option>
+      <option *ngFor="let type of roomTypes" [value]="type">{{ type }}</option>
+    </select>
+  </div>
 
-    <div class="form-group">
-      <label>Max: {{ searchForm.get('maxPrice')?.value }}€</label>
-      <input type="range" formControlName="maxPrice" min="50" max="1000" step="10">
-    </div>
+  <div class="form-group">
+    <label>Max: {{ searchForm.get('maxPrice')?.value }}€</label>
+    <input type="range" formControlName="maxPrice" min="50" max="1000" step="10">
+  </div>
 
-    <button type="submit" class="btn-search">Cerca Disponibilità</button>
-  </form>
-  <hr>
+  <button type="submit" class="btn-search">Cerca Disponibilità</button>
+</form>
+<hr>
 
-  <h3>Camere</h3>
+<h3>Camere</h3>
 
-  <div class="results">
-    <p *ngIf="rooms.length === 0">Nessuna stanza da mostrare.</p>
+<div class="results">
+  <p *ngIf="rooms.length === 0">Nessuna stanza da mostrare.</p>
 
-    <div class="room-list">
-      <div *ngFor="let room of rooms" class="room-card">
-        <div class="room-info">
-          <a [routerLink]="['/room', room.number]"> </a>
-          <h4>Camera {{ room.number }} - {{ room.name }}</h4>
-          <span class="badge">{{ room.type }}</span>
-          <p>{{ room.description }}</p>
-          <p class="price">Prezzo: <strong>{{ room.price }} €</strong></p>
-        </div>
-        <div class="room-actions">
-          <button class="btn-prenota">Prenota</button>
-        </div>
+  <div class="room-list">
+    <div *ngFor="let room of rooms" class="room-card">
+      <div class="room-info">
+        <a [routerLink]="['/room', room.number]"> </a>
+        <h4>Camera {{ room.number }} - {{ room.name }}</h4>
+        <span class="badge">{{ room.type }}</span>
+        <p>{{ room.description }}</p>
+        <p class="price">Prezzo: <strong>{{ room.price }} €</strong></p>
+      </div>
+      <div class="room-actions">
+        <button [routerLink]="['/room', room.number]" class="btn-prenota">Prenota </button>
       </div>
     </div>
   </div>
+</div>
 </div>

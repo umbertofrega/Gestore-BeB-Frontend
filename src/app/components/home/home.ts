@@ -70,4 +70,6 @@ export class Home implements OnInit {
       error: (err) => console.error('Errore ricerca:', err)
     });
   }
+
+  protected readonly RouterLink = RouterLink;
 }
