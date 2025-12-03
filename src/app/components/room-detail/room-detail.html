@@ -1,0 +1,11 @@
+<div class = "room-detail-card" >
+   @if (room == null){
+   <p> Errore nella ricezione della stanza </p>
+  } @else {
+     <div class = "room-details" >
+       <h2> {{room.name}}, {{room.type}}</h2>
+       <p> {{room.description}}</p>
+     </div>
+   }
+</div>
+
