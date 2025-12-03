@@ -37,7 +37,7 @@ export class RoomService {
       .set('minSize', minSize.toString());
 
     const typeStrings = types.join(',');
-    params = params.set('types', typeStrings);
+    params = params.set('type', typeStrings);
 
     return this.http.get<Room[]>(`${this.url}/search`, { params: params });
   }
