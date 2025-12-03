@@ -1,13 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import Keycloak from 'keycloak-js';
-import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  imports: [],
+  templateUrl: './navbar.html',
+  styleUrls: ['./navbar.css']
 })
 export class NavbarComponent implements OnInit {
 
@@ -17,7 +16,7 @@ export class NavbarComponent implements OnInit {
   private readonly keycloak= inject(Keycloak);
 
   async ngOnInit(): Promise<void> {
-    this.isLoggedIn = this.keycloak.loginRequired
+    this.keycloak.userInfo;
   }
 
   login() {
