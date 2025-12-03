@@ -2,7 +2,7 @@ import {provideRouter} from '@angular/router';
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideHttpClient} from '@angular/common/http';
 import {
-  provideKeycloak
+  provideKeycloak,
 } from 'keycloak-angular';
 
 import {routes} from './app.routes';
@@ -10,7 +10,7 @@ import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideKeycloak({
+     provideKeycloak({
       config: {
         url: 'http://localhost:8081',
         realm: 'GestoreBeb',
@@ -18,8 +18,10 @@ export const appConfig: ApplicationConfig = {
       },
       initOptions: {
         onLoad: 'check-sso',
-        silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
+        silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+        enableLogging: true
       }
+
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
