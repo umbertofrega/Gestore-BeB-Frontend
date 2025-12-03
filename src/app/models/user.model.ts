@@ -1,6 +1,6 @@
 export interface User {
   id: number;
-  code: string; // Il code di Keycloak
+  code: string;
   name: string;
   email: string;
 }
