@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
 import {Home} from './components/home/home';
-import {RoomDetail} from './components/room-detail/room-detail'; // Importa il componente!
+import {RoomDetail} from './components/room-detail/room-detail';
+import {AuthGuard} from './guards/auth.guard';
 
 export const routes: Routes = [
-  // 1. Rotta Home (path vuoto)
   { path: '', component: Home },
 
-  { path: 'room/:number', component : RoomDetail },
+  { path: 'room/:number', component : RoomDetail, canActivate: [AuthGuard] },
 
-  // 2. Rotta Catch-All (Wildcard) -> Va messa ALLA FINE
   { path: '**', redirectTo: '' }
 ];

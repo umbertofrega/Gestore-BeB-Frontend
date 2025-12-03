@@ -1,34 +1,31 @@
-import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {inject} from '@angular/core';
-import {AuthGuardData, createAuthGuard} from 'keycloak-angular';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import Keycloak from 'keycloak-js';
 
-const isAccessAllowed = async (
-  route: ActivatedRouteSnapshot,
-  _: RouterStateSnapshot,
-  authData: AuthGuardData
-): Promise<boolean | UrlTree> => {
-
-  const { authenticated, grantedRoles } = authData;
+export const AuthGuard: CanActivateFn = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const keycloak = inject(Keycloak);
   const router = inject(Router);
-  const requiredRole = route.data['role'];
-  const hasRequiredRole = (role: string): boolean =>
-    Object.values(grantedRoles.resourceRoles).some((roles) => roles.includes(role));
 
-  if (!requiredRole) {
-    console.error("ERRORE DI CONFIGURAZIONE: Rotta protetta senza ruolo specificato.");
-    return router.parseUrl('/error');
+  const authenticated = keycloak.authenticated;
+
+  if (!authenticated) {
+    await keycloak.login({
+      redirectUri: window.location.origin + state.url,
+    });
+    return false;
   }
 
+  const requiredRoles = route.data['roles'] as Array<string>;
+  if (!requiredRoles || requiredRoles.length === 0) {
+    return true;
+  }
+  const userRoles = keycloak.realmAccess?.roles || [];
+  const hasRole = requiredRoles.some((role) => userRoles.includes(role));
 
-
-  if (authenticated && hasRequiredRole(requiredRole)) {
+  if (hasRole) {
     return true;
   }
 
-
-  return router.parseUrl('/forbidden');
-
-
+  alert('Non hai i permessi!');
+  return false;
 };
-
-export const canActivateAuthRole = createAuthGuard<CanActivateFn>(isAccessAllowed);
