@@ -20,15 +20,15 @@
   </form>
 
   <ul class="nav-links">
-    @if (isAdminAreaVisible()) {
+    @if (isAdmin()) {
       <li>
-        <a routerLink="/admin" routerLinkActive="active" class="nav-link-text">Gestione</a>
+        <a [routerLink]="['/admin']" class="nav-link-text"> Gestione</a>
       </li>
     }
 
     @if (this.keycloak.authenticated) {
       <li>
-        <a routerLink="/profile" routerLinkActive="active" class="nav-link-text">Profilo</a>
+        <a [routerLink]="['/me']" class="nav-link-text"> Profilo</a>
       </li>
       <li>
         <button class="btn-base btn-logout" (click)="logout()">Esci</button>
@@ -36,6 +36,9 @@
     } @else {
       <li>
         <button class="btn-base btn-login" (click)="login()">Accedi</button>
+      </li>
+      <li>
+        <button class="btn-base btn-login" (click)="register()">Registrati</button>
       </li>
     }
   </ul>

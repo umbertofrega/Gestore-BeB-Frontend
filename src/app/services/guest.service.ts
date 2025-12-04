@@ -18,4 +18,7 @@ export class GuestService{
     return this.http.get<Guest[]>(`${this.url}`)
   }
 
+  getCurrentGuest() : Observable<Guest>{
+    return this.http.get<Guest>(`${this.url}/me`)
+  }
 }
