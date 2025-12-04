@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Room} from '../../models/room.model';
 import {RoomService} from '../../services/room.service';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -24,7 +24,6 @@ export class RoomDetail implements OnInit{
     const number = this.route.snapshot.paramMap.get('number');
     if (number)
       this.loadRoomDetail(number)
-
   }
 
   loadRoomDetail(roomNumber : String) {
@@ -36,4 +35,6 @@ export class RoomDetail implements OnInit{
       },
     );
   }
+
+
 }

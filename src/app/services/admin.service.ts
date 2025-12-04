@@ -13,7 +13,6 @@ export class AdminService{
     return this.http.post<Admin>(`${this.url}`, admin)
   }
 
-
   getAllAdmins(): Observable<Admin[]>{
     return this.http.get<Admin[]>(`${this.url}`)
   }
