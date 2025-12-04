@@ -26,7 +26,7 @@
       </li>
     }
 
-    @if (isLoggedIn) {
+    @if (this.keycloak.authenticated) {
       <li>
         <a routerLink="/profile" routerLinkActive="active" class="nav-link-text">Profilo</a>
       </li>
