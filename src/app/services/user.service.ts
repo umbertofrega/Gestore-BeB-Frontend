@@ -17,4 +17,7 @@ export class UserService{
     return this.http.get<User>(`${this.url}`)
   }
 
+  getUser(code: string): Observable<User>{
+    return this.http.get<User>(`${this.url}/${code}`)
+  }
 }
