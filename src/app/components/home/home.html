@@ -17,7 +17,11 @@
           </div>
 
           <div class="room-actions">
-            <button [routerLink]="['/room', room.number]" class="btn-prenota">Prenota</button>
+            @if (keycloak.authenticated) {
+              <button [routerLink]="['/room', room.number]" class="btn-prenota">Prenota</button>
+            } @else {
+              <button class="btn-disabled">Prenota</button>
+            }
           </div>
         </div>
       }

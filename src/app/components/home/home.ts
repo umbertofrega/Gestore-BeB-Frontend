@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router'; // ActivatedRoute serve per leggere l'URL
 import { RoomService } from '../../services/room.service';
 import { Room } from '../../models/room.model';
+import Keycloak from 'keycloak-js';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { Room } from '../../models/room.model';
 export class Home implements OnInit {
   private roomService = inject(RoomService);
   private route = inject(ActivatedRoute);
-
+  keycloak = inject(Keycloak)
   rooms: Room[] = [];
 
   ngOnInit() {
