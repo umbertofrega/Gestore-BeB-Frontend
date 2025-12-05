@@ -33,9 +33,8 @@ export class Navbar implements OnInit {
       type: [null],
     });
 
-    this.keycloak.onAuthSuccess = () =>{
-     this.syncUser()
-    }
+    if(this.keycloak.authenticated)
+       await this.syncUser()
   }
 
   onSearch() {
@@ -76,15 +75,15 @@ export class Navbar implements OnInit {
    async register(){
     if(this.keycloak.authenticated)
       await this.keycloak.logout()
-     this.keycloak.register()
+    await this.keycloak.register()
   }
 
-  login() {
-    this.keycloak.login()
+  async login() {
+    await this.keycloak.login()
   }
 
-  logout() {
-    this.keycloak.logout()
+  async logout() {
+    await this.keycloak.logout()
   }
 
   isAdmin(): boolean {
