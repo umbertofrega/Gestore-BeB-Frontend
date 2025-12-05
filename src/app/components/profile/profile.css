@@ -1,12 +1,10 @@
-/* Container principale */
+
 .profile-container {
   padding: 20px;
-  max-width: 1000px; /* Un po' più stretto della search per focus sul contenuto */
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-/* --- Header Profilo --- */
-/* Uso lo stile simile a .search-form per coerenza */
 .profile-header {
   background: var(--bg-surface);
   padding: 30px;
@@ -31,19 +29,17 @@
 .separator {
   border: 0;
   height: 1px;
-  background: var(--border); /* Uso la variabile border */
+  background: var(--border);
   margin: 30px 0;
   opacity: 0.5;
 }
 
-/* --- Sezione Prenotazioni --- */
 .reservations-section h2 {
   color: var(--text-main);
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
 
-/* Card Prenotazione - Basata su .room-card */
 .reservation-card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border);
@@ -61,13 +57,12 @@
   border-color: var(--primary);
 }
 
-/* Dettagli Card */
 .card-details {
-  flex: 1; /* Prende lo spazio disponibile */
+  flex: 1;
 }
 
 .card-title {
-  color: var(--text-main); /* o var(--primary) se vuoi risaltarlo */
+  color: var(--text-main);
   margin: 0 0 8px 0;
   font-size: 1.3rem;
   font-weight: bold;
@@ -79,7 +74,6 @@
   font-size: 1rem;
 }
 
-/* Date - Stile Tag/Badge */
 .dates {
   display: flex;
   gap: 10px;
@@ -87,7 +81,6 @@
 }
 
 .date-tag {
-  /* Prendo spunto dal tuo .badge ma più neutro per le date */
   background: rgba(255, 255, 255, 0.05);
   color: var(--text-muted);
   padding: 6px 12px;
@@ -100,7 +93,6 @@
   color: var(--text-main);
 }
 
-/* Status e Prezzo */
 .card-status {
   text-align: right;
   display: flex;
@@ -108,50 +100,58 @@
   align-items: flex-end;
   gap: 12px;
   min-width: 150px;
+  padding: 10px;
+  border-radius: 8px;
 }
 
-/* Prendo spunto dal tuo .price */
 .card-total {
   font-size: 1.4em;
-  color: var(--success); /* Verde successo */
+  color: var(--success);
   font-weight: bold;
   margin: 0;
 }
 
-/* Badge dinamici per lo status */
+.passed-reservation-card {
+  opacity: 0.5;
+  border-left: 5px solid var(--text-muted);
+  box-shadow: none;
+}
+
+.passed-reservation-card:hover {
+  transform: none;
+  border-color: var(--border);
+}
+
 .status-badge {
   padding: 6px 12px;
   border-radius: 8px;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.85rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
-
-/* Varianti colori status (adatta i colori alle tue variabili se le hai) */
 .CONFIRMED {
-  background: rgba(76, 175, 80, 0.15); /* Verde trasparente */
+  background: rgba(76, 175, 80, 0.15);
   color: #4caf50;
   border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 .PENDING {
-  background: rgba(255, 193, 7, 0.15); /* Giallo trasparente */
+  background: rgba(255, 193, 7, 0.15);
   color: #ffc107;
   border: 1px solid rgba(255, 193, 7, 0.3);
 }
 
 .CANCELLED {
-  background: rgba(244, 67, 54, 0.15); /* Rosso trasparente */
+  background: rgba(244, 67, 54, 0.15);
   color: #f44336;
   border: 1px solid rgba(244, 67, 54, 0.3);
-  text-decoration: line-through; /* Opzionale */
+  text-decoration: line-through;
 }
 
-/* --- Empty State --- */
 .empty-state {
   background: var(--bg-surface);
-  border: 1px dashed var(--border); /* Bordo tratteggiato */
+  border: 1px dashed var(--border);
   border-radius: 16px;
   padding: 40px;
   text-align: center;
@@ -163,10 +163,10 @@
   font-size: 1.1rem;
 }
 
-/* Bottone azione - Copiato dal tuo .btn-prenota */
+
 .action-button {
   background: var(--primary);
-  color: var(--text-inverse, #fff); /* Fallback a bianco */
+  color: var(--text-inverse, #fff);
   padding: 12px 24px;
   border: none;
   cursor: pointer;
@@ -177,23 +177,35 @@
 }
 
 .action-button:hover {
-  background: var(--primary-dark, #3700b3); /* Fallback a scuro */
+  background: var(--primary-dark, #3700b3);
 }
 
-/* --- Responsive per Mobile --- */
 @media (max-width: 768px) {
   .reservation-card {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .card-status {
-    width: 100%;
-    margin-top: 20px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--border);
-    padding-top: 15px;
+.btn-delete,
+  .action-delete-button {
+    background: var(--danger);
+    color: var(--text-inverse);
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+.btn-delete:hover,
+  .action-delete-button:hover {
+    background: #d45f5f;
+  }
+
+.btn-delete:active,
+  .action-delete-button:active {
+    transform: translateY(1px);
   }
 }
