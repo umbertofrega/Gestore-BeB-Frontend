@@ -17,10 +17,15 @@
           </div>
 
           <div class="room-actions">
-            @if (keycloak.authenticated) {
-              <button [routerLink]="['/room', room.number]" class="btn-prenota">Prenota</button>
-            } @else {
-              <button class="btn-disabled">Prenota</button>
+            @if (keycloak.authenticated && this.hasSearched()) {
+              <button
+                [routerLink]="['/room', room.number]"
+                [queryParams]="{
+                  checkin: this.route.snapshot.queryParams['checkin'],
+                  checkout: this.route.snapshot.queryParams['checkout']  }"
+                class="btn-prenota">
+                Prenota
+              </button>
             }
           </div>
         </div>

@@ -14,7 +14,7 @@ import Keycloak from 'keycloak-js';
 })
 export class Home implements OnInit {
   private roomService = inject(RoomService);
-  private route = inject(ActivatedRoute);
+  protected route = inject(ActivatedRoute);
   keycloak = inject(Keycloak)
   rooms: Room[] = [];
 
@@ -26,6 +26,12 @@ export class Home implements OnInit {
         this.loadAllRooms();
       }
     });
+  }
+
+  hasSearched(): boolean {
+    const params = this.route.snapshot.queryParams;
+
+    return !!params['checkin'] && !!params['checkout'];
   }
 
   loadAllRooms() {
