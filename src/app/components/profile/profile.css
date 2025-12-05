@@ -1,0 +1,199 @@
+/* Container principale */
+.profile-container {
+  padding: 20px;
+  max-width: 1000px; /* Un po' più stretto della search per focus sul contenuto */
+  margin: 0 auto;
+}
+
+/* --- Header Profilo --- */
+/* Uso lo stile simile a .search-form per coerenza */
+.profile-header {
+  background: var(--bg-surface);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-message {
+  color: var(--text-main);
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+}
+
+.email-info {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background: var(--border); /* Uso la variabile border */
+  margin: 30px 0;
+  opacity: 0.5;
+}
+
+/* --- Sezione Prenotazioni --- */
+.reservations-section h2 {
+  color: var(--text-main);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+/* Card Prenotazione - Basata su .room-card */
+.reservation-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.reservation-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+}
+
+/* Dettagli Card */
+.card-details {
+  flex: 1; /* Prende lo spazio disponibile */
+}
+
+.card-title {
+  color: var(--text-main); /* o var(--primary) se vuoi risaltarlo */
+  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.card-room {
+  color: var(--text-muted);
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+/* Date - Stile Tag/Badge */
+.dates {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.date-tag {
+  /* Prendo spunto dal tuo .badge ma più neutro per le date */
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+}
+
+.date-tag strong {
+  color: var(--text-main);
+}
+
+/* Status e Prezzo */
+.card-status {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 150px;
+}
+
+/* Prendo spunto dal tuo .price */
+.card-total {
+  font-size: 1.4em;
+  color: var(--success); /* Verde successo */
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Badge dinamici per lo status */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* Varianti colori status (adatta i colori alle tue variabili se le hai) */
+.CONFIRMED {
+  background: rgba(76, 175, 80, 0.15); /* Verde trasparente */
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.PENDING {
+  background: rgba(255, 193, 7, 0.15); /* Giallo trasparente */
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.CANCELLED {
+  background: rgba(244, 67, 54, 0.15); /* Rosso trasparente */
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  text-decoration: line-through; /* Opzionale */
+}
+
+/* --- Empty State --- */
+.empty-state {
+  background: var(--bg-surface);
+  border: 1px dashed var(--border); /* Bordo tratteggiato */
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* Bottone azione - Copiato dal tuo .btn-prenota */
+.action-button {
+  background: var(--primary);
+  color: var(--text-inverse, #fff); /* Fallback a bianco */
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.action-button:hover {
+  background: var(--primary-dark, #3700b3); /* Fallback a scuro */
+}
+
+/* --- Responsive per Mobile --- */
+@media (max-width: 768px) {
+  .reservation-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-status {
+    width: 100%;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+  }
+}

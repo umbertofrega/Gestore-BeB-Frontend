@@ -1,4 +1,40 @@
-<div class="container">
-  <h2> Ciao, {{this.guest?.name}}  </h2>
+<div class="profile-container">
 
+  @if (guest) {
+    <div class="profile-header">
+      <h1 class="welcome-message">Ciao, {{ guest.name }} 👋</h1>
+      <p class="email-info">{{ guest.email }}</p>
+    </div>
+  }
+
+  <hr class="separator">
+
+  <div class="reservations-section">
+    <h2>Le Tue Prenotazioni</h2>
+
+    @for (reservation of reservations; track reservation.id) {
+      <div class="reservation-card">
+        <div class="card-details">
+          <p class="card-title">Prenotazione #{{ reservation.id }}</p>
+          <p class="card-room">Stanza: {{ reservation.room }}</p>
+
+          o <div class="dates">
+            <span class="date-tag check-in">Check-in: <strong>{{ reservation.checkin | date:'dd/MM/yyyy' }}</strong></span>
+            <span class="date-tag check-out">Check-out: <strong>{{ reservation.checkout | date:'dd/MM/yyyy' }}</strong></span>
+          </div>
+        </div>
+
+        <div class="card-status">
+          <span [ngClass]="reservation.paymentStatus">{{ reservation.paymentStatus }}</span>
+          <p class="card-total">Totale: <strong>{{ reservation.price | currency:'EUR':'symbol':'1.2-2':'it' }}</strong></p>
+        </div>
+      </div>
+    }
+    @empty {
+      <div class="empty-state">
+        <p>Non hai prenotazioni attive o passate.</p>
+      </div>
+    }
+
+  </div>
 </div>
