@@ -1,7 +1,6 @@
 import {Component, OnInit, inject} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import Keycloak from 'keycloak-js';
-import { AdminRole } from '../../models/enums/admin-role.model';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomType } from '../../models/enums/room-types.model';
 import { CommonModule } from '@angular/common';
@@ -17,7 +16,6 @@ import {Guest} from '../../models/guest.model';
   styleUrls: ['./navbar.css']
 })
 export class Navbar implements OnInit {
-  public userRoles: string[] = [];
   guest : Guest | null = null;
   searchForm!: FormGroup;
   guestService = inject(GuestService)
@@ -34,7 +32,7 @@ export class Navbar implements OnInit {
     });
 
     if(this.keycloak.authenticated)
-       await this.syncUser()
+      await this.syncUser()
   }
 
   onSearch() {
@@ -54,7 +52,7 @@ export class Navbar implements OnInit {
 
       const newGuest: Guest = {
         id: 0,
-        code: this.keycloak.subject!, // UUID
+        code: this.keycloak.subject!,
         name: `${profile.firstName} ${profile.lastName}`,
         email: profile.email!
       };
@@ -70,6 +68,7 @@ export class Navbar implements OnInit {
     } catch (e) {
       console.error('Errore nel caricamento profilo:', e);
     }
+    this.redirectToAdmin()
   }
 
    async register(){
@@ -79,7 +78,7 @@ export class Navbar implements OnInit {
   }
 
   async login() {
-    await this.keycloak.login()
+    await this.keycloak.login({redirectUri: window.location.href})
   }
 
   async logout() {
@@ -87,6 +86,12 @@ export class Navbar implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this.userRoles.includes(AdminRole.OWNER) || this.userRoles.includes(AdminRole.RECEPTIONIST);
+    return this.keycloak.hasRealmRole("RECEPTIONIST") || this.keycloak.hasRealmRole("OWNER");
+
+  }
+
+  redirectToAdmin(): void {
+    if(this.isAdmin())
+      this.router.navigate(['/admin'])
   }
 }

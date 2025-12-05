@@ -2,34 +2,32 @@
   <div class="logo">
     <a routerLink="/">Gestore B&B</a>
   </div>
+  @if (!isAdmin()) {
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="nav-search">
+      <div class="search-inputs">
+        <input type="date" formControlName="checkin" class="nav-input" title="Data Arrivo">
+        <input type="date" formControlName="checkout" class="nav-input" title="Data Partenza">
 
-  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="nav-search">
-    <div class="search-inputs">
-      <input type="date" formControlName="checkin" class="nav-input" title="Data Arrivo">
-      <input type="date" formControlName="checkout" class="nav-input" title="Data Partenza">
+        <select formControlName="type" class="nav-select">
+          <option [ngValue]="null">Tipo</option>
+          @for (type of roomTypes; track type) {
+            <option [value]="type">{{type}}</option>
+          }
+        </select>
 
-      <select formControlName="type" class="nav-select">
-        <option [ngValue]="null">Tipo</option>
-        @for (type of roomTypes; track type) {
-          <option [value]="type">{{type}}</option>
-        }
-      </select>
+        <button type="submit" class="btn-base btn-search">Cerca</button>
+      </div>
+    </form>
+  } @else {
 
-      <button type="submit" class="btn-base btn-search">Cerca</button>
-    </div>
-  </form>
-
+  }
   <ul class="nav-links">
-    @if (isAdmin()) {
-      <li>
-        <a [routerLink]="['/admin']" class="nav-link-text"> Gestione</a>
-      </li>
-    }
-
     @if (this.keycloak.authenticated) {
-      <li>
-        <a [routerLink]="['/me']" class="nav-link-text"> Profilo</a>
-      </li>
+      @if(!isAdmin()) {
+        <li>
+          <a [routerLink]="['/me']" class="nav-link-text"> Profilo</a>
+        </li>
+      }
       <li>
         <button class="btn-base btn-logout" (click)="logout()">Esci</button>
       </li>
