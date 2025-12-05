@@ -17,8 +17,8 @@ export class ReservationService {
     return this.http.post<Reservation>(`${this.url}`, reservation)
   }
 
-  getAllReservations() : Observable<Reservation> {
-    return this.http.get<Reservation>(`${this.url}`)
+  getAllReservations() : Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.url}`)
   }
 
   getReservation(reservationId : number) : Observable<Reservation> {
