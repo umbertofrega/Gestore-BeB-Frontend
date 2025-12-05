@@ -1,0 +1,143 @@
+/* ==================================== */
+/* 1. LAYOUT PRINCIPALE e STILI BASE    */
+/* ==================================== */
+
+.room-detail-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Rimuoviamo il bg-body qui, gestito globalmente */
+}
+
+.room-detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+  background-color: var(--bg-surface); /* Sfondo Card: Scuro */
+  border-radius: 12px;
+  /* Ombra più discreta per il tema scuro */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+}
+
+.error-message {
+  color: var(--danger); /* Rosso errore */
+  padding: 20px;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  background-color: rgba(248, 113, 113, 0.1); /* Sfondo soft del colore danger */
+  text-align: center;
+}
+
+/* ==================================== */
+/* 2. DETTAGLI STANZA (Sinistra)        */
+/* ==================================== */
+
+.room-details {
+  border-bottom: 2px solid var(--border); /* Separatore scuro */
+  padding-bottom: 20px;
+}
+
+.room-title {
+  font-size: 2.2em;
+  color: var(--primary); /* Blu Primary per il titolo */
+  margin-bottom: 5px;
+}
+
+.room-type {
+  font-size: 0.8em;
+  background-color: var(--bg-input);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--text-muted); /* Testo Mutato */
+  font-weight: 600;
+}
+
+.room-description {
+  color: var(--text-main);
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+/* ==================================== */
+/* 3. RIEPILOGO PRENOTAZIONE (Destra)   */
+/* ==================================== */
+
+.reservation-card {
+  background-color: var(--bg-input); /* Sfondo leggermente più scuro di bg-surface */
+  padding: 25px;
+  border-radius: 8px;
+  border-left: 5px solid var(--primary); /* Barra blu Primary */
+}
+
+.reservation-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  font-size: 1.5em;
+  border-bottom: 1px dashed var(--border); /* Linea tratteggiata chiara */
+  padding-bottom: 10px;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary-line .label {
+  font-weight: 600;
+  color: var(--text-muted); /* Etichette in colore Mutato */
+}
+
+.summary-line .value {
+  color: var(--text-main);
+  text-align: right;
+}
+
+/* ==================================== */
+/* 4. SEZIONE PREZZO TOTALE             */
+/* ==================================== */
+
+.total-price-box {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px solid var(--primary); /* Linea blu Primary */
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.total-value {
+  color: var(--success); /* Verde Success per il prezzo finale */
+}
+
+/* ==================================== */
+/* 5. PULSANTE DI CONFERMA              */
+/* ==================================== */
+
+.btn-prenota {
+  width: 100%;
+  padding: 15px 20px;
+  margin-top: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--text-inverse); /* Testo nero sul pulsante colorato */
+  background-color: var(--success); /* Verde Success per l'azione positiva */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-prenota:hover {
+  /* Scurendo leggermente il verde al passaggio del mouse */
+  background-color: #3cb46e;
+}
+
+.btn-prenota:active {
+  transform: translateY(1px);
+}
