@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Guest} from '../models/guest.model';
+import {Reservation} from '../models/reservation.model';
 
 @Injectable({ providedIn : 'root' })
 export class GuestService{
@@ -20,5 +21,9 @@ export class GuestService{
 
   getCurrentGuest() : Observable<Guest>{
     return this.http.get<Guest>(`${this.url}/me`)
+  }
+
+  getReservations() : Observable<Reservation[]>{
+    return this.http.get<Reservation[]>(`${this.url}/reservations`)
   }
 }
