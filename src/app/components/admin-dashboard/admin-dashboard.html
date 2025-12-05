@@ -1,0 +1,48 @@
+<div class = container>
+  <div class="room-list">
+    <h1> Camere </h1>
+    <button class = "btn-prenota" (click) = addRoom(11)> Aggiungi camera</button>
+    @for (room of rooms; track room.number) {
+      <div class="room-card">
+        <div class="room-info">
+          <h4>Camera {{ room.number }} - {{ room.name }}</h4>
+          <span class="badge">{{ room.type }}</span>
+          <p>{{ room.description }}</p>
+          <p class="price">Prezzo: <strong>{{ room.price }} €</strong></p>
+          <button class = "btn-logout" (click)="deleteRoom(room.number)"> Elimina camera</button>
+          <button class = "btn-base" (click)="editRoom(room.number)"> Modifica camera</button>
+        </div>
+      </div>
+    }
+    <h1> Ospiti </h1>
+    @for (guest of guests; track guest.name){
+      <div class ="room-card">
+        <div class="room-info">
+          <h4> Ospite {{guest.id}} - {{guest.name}} </h4>
+          <p> Email: {{guest.email}} </p>
+        </div>
+      </div>
+    }
+
+    <h1> Prenotazioni </h1>
+    @for (reservation of reservations; track reservation.id){
+      <div class ="room-card">
+        <div class="room-info">
+          <h4> Prenotazione {{reservation.id}} </h4>
+          <h3> Ospite: {{reservation.guest.name}}</h3>
+          <p> Stanza: {{reservation.room.number}} - {{reservation.room.name}} </p>
+          <div class="dates">
+            <span class="date-tag check-in">Check-in: <strong>{{ reservation.checkin | date:'dd/MM/yyyy' }}</strong></span>
+            <span class="date-tag check-out">Check-out: <strong>{{ reservation.checkout | date:'dd/MM/yyyy' }}</strong></span>
+          </div>
+          <div class="card-status">
+            <span [ngClass]="reservation.paymentStatus">{{ reservation.paymentStatus }}</span>
+            <p class="card-total">Totale: <strong>{{ reservation.price }}$</strong></p>
+          </div>
+          <button (click)="updateReservation()"> Cambia stato del pagamento</button>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>

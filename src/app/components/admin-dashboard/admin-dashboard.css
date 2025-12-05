@@ -1,0 +1,130 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.search-form {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  background: var(--bg-surface);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.form-group label {
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.room-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.room-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+}
+
+.room-info h4 {
+  color: var(--text-main);
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+}
+
+.room-info p {
+  color: var(--text-muted);
+}
+
+.badge {
+  background: rgba(187, 134, 252, 0.15);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid rgba(187, 134, 252, 0.3);
+}
+
+.price {
+  font-size: 1.4em;
+  color: var(--success);
+  margin-top: 10px;
+}
+
+.btn-prenota {
+  background: var(--primary);
+  color: var(--text-inverse);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.btn-prenota:hover {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.btn-disabled {
+  background-color: #555;
+  color: #ddd;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.btn-disabled:hover {
+  background-color: #333;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.dates {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.date-tag {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+}
+
+.date-tag strong {
+  color: var(--text-main);
+}
+.btn-logout {
+  background-color: var(--bg-input);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  margin-right: 5px;
+}
+.btn-logout:hover {
+  background-color: var(--danger);
+  color: #fff;
+}
