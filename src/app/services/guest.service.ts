@@ -26,4 +26,8 @@ export class GuestService{
   getReservations() : Observable<Reservation[]>{
     return this.http.get<Reservation[]>(`${this.url}/reservations`)
   }
+
+  getInHouse() : Observable<Guest[]>{
+    return this.http.get<Guest[]>(`${this.url}/inHouse`)
+  }
 }

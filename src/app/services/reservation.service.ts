@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Reservation} from '../models/reservation.model';
-import {RoomType} from '../models/enums/room-types.model';
-import {PaymentStatus} from '../models/enums/payment-status.model';
 
 @Injectable({ providedIn: 'root' })
 
@@ -25,14 +23,12 @@ export class ReservationService {
     return this.http.get<Reservation>(`${this.url}/${reservationId}`)
   }
 
-  searchReservation(type : RoomType) : Observable<Reservation[]> {
-    const params = new HttpParams().set('type' , type)
-    return this.http.get<Reservation[]>(`${this.url}/search`,  { params: params })
+  getOnlyPending() : Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.url}/search`)
   }
 
-
-  updateStatus(status : PaymentStatus, reservationId : number) : Observable<Reservation>{
-    return this.http.put<Reservation>(`${this.url}/${reservationId}`, status)
+  updateStatus(reservationId : number) : Observable<Reservation>{
+    return this.http.put<Reservation>(`${this.url}/${reservationId}`,reservationId)
   }
 
   deleteReservation(reservationId : number): Observable<Reservation>{
