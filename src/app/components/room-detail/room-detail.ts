@@ -72,7 +72,7 @@ export class RoomDetail implements OnInit{
     const checkinDate = new Date(checkinString);
     const checkoutDate = new Date(checkoutString);
 
-    const totalNights = differenceInDays(checkinDate, checkoutDate)
+    const totalNights = differenceInDays(checkoutDate, checkinDate)
 
     const totalPrice = this.room.price * totalNights;
 
