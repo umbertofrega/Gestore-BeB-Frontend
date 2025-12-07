@@ -1,130 +1,161 @@
 .container {
-  padding: 20px;
+  padding: 30px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.search-form {
+.room-list {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  background: var(--bg-surface);
-  padding: 25px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  flex-direction: column;
+  gap: 40px;
 }
 
-.form-group label {
-  color: var(--text-muted);
-  margin-bottom: 5px;
-  display: block;
+h1 {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 10px;
+  margin-top: 20px;
+  font-size: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+h1:first-child {
+  margin-top: 0;
+}
 .room-card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border);
   padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: transform 0.2s;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .room-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--primary);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.room-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .room-info h4 {
   color: var(--text-main);
-  margin: 0 0 10px 0;
-  font-size: 1.3rem;
-}
-
-.room-info p {
-  color: var(--text-muted);
+  font-size: 1.4em;
+  margin: 0;
+  padding-bottom: 5px;
 }
 
 .badge {
-  background: rgba(187, 134, 252, 0.15);
-  color: var(--primary);
-  padding: 4px 10px;
-  border-radius: 8px;
+  background-color: var(--bg-input);
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  align-self: flex-start;
   font-weight: 600;
-  border: 1px solid rgba(187, 134, 252, 0.3);
 }
 
 .price {
-  font-size: 1.4em;
+  font-size: 1.1em;
+  color: var(--text-muted);
+}
+.price strong {
   color: var(--success);
-  margin-top: 10px;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+.room-info button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 10px;
+  transition: background-color 0.2s;
 }
 
 .btn-prenota {
-  background: var(--primary);
+  background-color: var(--primary);
   color: var(--text-inverse);
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1em;
 }
 
 .btn-prenota:hover {
-  background: var(--primary-dark);
-  color: white;
+  background-color: #3f90e0; var(--primary);
 }
 
-.btn-disabled {
-  background-color: #555;
-  color: #ddd;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 1rem;
+.btn-logout {
+  background-color: var(--danger);
+  color: var(--text-inverse);
 }
 
-.btn-disabled:hover {
-  background-color: #333;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 1rem;
+.btn-logout:hover {
+  background-color: #d45f5f;
 }
+
+.btn-base {
+  background-color: var(--bg-input);
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+.btn-base:hover {
+  background-color: #383838;
+}
+
 .dates {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 15px;
+  margin: 10px 0;
 }
 
 .date-tag {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
+  background-color: rgba(77, 171, 247, 0.1);
+  color: var(--primary);
   padding: 6px 12px;
   border-radius: 8px;
-  font-size: 0.9rem;
-  border: 1px solid var(--border);
+  font-size: 0.9em;
+  font-weight: 600;
 }
 
 .date-tag strong {
   color: var(--text-main);
 }
-.btn-logout {
-  background-color: var(--bg-input);
-  color: var(--danger);
-  border: 1px solid var(--danger);
-  margin-right: 5px;
+
+.card-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed var(--border);
 }
-.btn-logout:hover {
-  background-color: var(--danger);
-  color: #fff;
+
+.card-total {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: var(--success);
+  margin: 0;
+}
+
+.card-status button {
+  background-color: var(--accent);
+  color: var(--text-inverse);
 }

@@ -1,7 +1,7 @@
 <div class = container>
   <div class="room-list">
     <h1> Camere </h1>
-    <button class = "btn-prenota" (click) = addRoom(11)> Aggiungi camera</button>
+    <button class = "btn-prenota" (click) = addRoom()> Aggiungi camera</button>
     @for (room of rooms; track room.number) {
       <div class="room-card">
         <div class="room-info">
@@ -14,7 +14,11 @@
         </div>
       </div>
     }
-    <h1> Ospiti </h1>
+    <h1> Ospiti <div class="header-actions">
+      <button class="btn-base" (click)="loadAllGuests()"> Mostra tutti</button>
+      <button class="btn-base" (click)="loadOnlyGuestsInHouse()">Mostra solo presenti</button>
+    </div>
+    </h1>
     @for (guest of guests; track guest.name){
       <div class ="room-card">
         <div class="room-info">
@@ -24,9 +28,12 @@
       </div>
     }
 
-    <h1> Prenotazioni </h1>
+    <h1> Prenotazioni <div class="header-actions">
+      <button class="btn-base" (click)="loadAllReservations()"> Mostra tutte</button>
+      <button class="btn-base" (click)="loadOnlyPending()">Mostra solo non pagate</button>
+    </div></h1>
     @for (reservation of reservations; track reservation.id){
-      <div class ="room-card">
+      <li class ="room-card">
         <div class="room-info">
           <h4> Prenotazione {{reservation.id}} </h4>
           <h3> Ospite: {{reservation.guest.name}}</h3>
@@ -39,9 +46,11 @@
             <span [ngClass]="reservation.paymentStatus">{{ reservation.paymentStatus }}</span>
             <p class="card-total">Totale: <strong>{{ reservation.price }}$</strong></p>
           </div>
-          <button (click)="updateReservation()"> Cambia stato del pagamento</button>
+          @if (reservation.id && reservation.paymentStatus == PaymentStatus.PENDING) {
+            <button (click)="updateReservation(reservation.id)"> Segna come pagato </button>
+          }
         </div>
-      </div>
+      </li>
     }
 
   </div>

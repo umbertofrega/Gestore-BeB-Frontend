@@ -6,6 +6,7 @@ import {Guest} from '../../models/guest.model';
 import {Room} from '../../models/room.model';
 import {Reservation} from '../../models/reservation.model';
 import {DatePipe, NgClass} from '@angular/common';
+import {PaymentStatus} from '../../models/enums/payment-status.model';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -22,8 +23,9 @@ export class AdminDashboard implements OnInit{
   roomService = inject(RoomService)
   guests : Guest[] = []
   rooms : Room[] = []
-  reservations : Reservation[] = [
-  ]
+  protected readonly PaymentStatus = PaymentStatus;
+  reservations : Reservation[] = []
+
 
   ngOnInit() {
     this.loadAllGuests();
@@ -40,17 +42,26 @@ export class AdminDashboard implements OnInit{
     })
   }
 
-  addRoom(number : number){
-    this.roomService.deleteRoom(number)
+  addRoom(){
+    /*
+    this.roomService.addRoom(room).subscribe(
+      () => this.loadAllRooms()
+    )
+
+     */
   }
 
   deleteRoom(number: number) {
     this.roomService.deleteRoom(number)
   }
 
-  editRoom(number : number){
-    //TODO
+  editRoom(oldRoom : number){
+    /*
+    this.roomService.updateRoom(oldRoom, newRoom)
+  */
   }
+
+
   loadAllRooms(){
     this.roomService.getAllRooms().subscribe({
       next: (roomData) => {
@@ -69,8 +80,31 @@ export class AdminDashboard implements OnInit{
     });
   }
 
-  protected updateReservation() {
-
+  updateReservation(reservationId : number) {
+    this.reservationService.updateStatus(reservationId).subscribe(
+      () => this.loadAllReservations()
+    )
   }
+
+  protected loadOnlyPending(){
+    this.reservationService.getOnlyPending().subscribe({
+      next: (reservationData) => {
+        this.reservations = reservationData
+    },
+      error : err => console.error('Errore ricezione prenotazioni', err)
+    }
+    )
+  }
+
+  protected loadOnlyGuestsInHouse() {
+    this.guestService.getInHouse().subscribe({
+      next: (guestData) => {
+        this.guests = guestData;
+      },
+      error : err => console.error('Errore ricezione ospiti', err)
+    })
+  }
+
+
 }
 
