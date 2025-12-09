@@ -9,15 +9,7 @@ export class UserService{
 
   constructor(private http: HttpClient) {}
 
-  getCurrentUser() : Observable<User>{
-    return this.http.get<User>(`${this.url}/me`)
-  }
-
   getAllUsers(): Observable<User>{
     return this.http.get<User>(`${this.url}`)
-  }
-
-  getUser(code: string): Observable<User>{
-    return this.http.get<User>(`${this.url}/${code}`)
   }
 }

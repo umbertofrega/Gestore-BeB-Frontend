@@ -5,9 +5,7 @@ import Keycloak from 'keycloak-js';
 export const AuthGuard: CanActivateFn = async (route: ActivatedRouteSnapshot) => {
   const keycloak = inject(Keycloak);
 
-  const authenticated = keycloak.authenticated;
-
-  if (!authenticated) {
+  if (!keycloak.authenticated) {
     await keycloak.login({
       redirectUri: window.location.origin,
     });

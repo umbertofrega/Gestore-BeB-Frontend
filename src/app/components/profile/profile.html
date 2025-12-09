@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="card-status">
-          <span class="status-badge" [ngClass]="reservation.paymentStatus"> {{ reservation.paymentStatus }} </span>
+          <span class="status-badge" [ngClass]="reservation.paymentStatus"> {{ reservation.paymentStatus.toString() }} </span>
           <p class="card-total">Totale: <strong>{{ reservation.price }}$ </strong></p>
         </div>
         @if (isRevocable(reservation)) {

@@ -31,7 +31,7 @@ export class Navbar implements OnInit {
       minGuests: [null]
     });
 
-    if(this.keycloak.authenticated || !this.isAdmin())
+    if(this.keycloak.authenticated)
       await this.syncUser()
   }
 

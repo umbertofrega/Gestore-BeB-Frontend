@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Room} from '../models/room.model';
 import {Observable} from 'rxjs';
-import {RoomState} from '../models/enums/room-state.model';
 
 @Injectable({ providedIn: 'root' })
 class RoomService {
@@ -14,12 +13,12 @@ class RoomService {
     return this.http.post<Room>(this.url, room)
   }
 
-  getAllRooms(): Observable<Room[]>{
-    return this.http.get<Room[]>(this.url);
-  }
-
   getRoom(roomNumber : number): Observable<Room>{
     return this.http.get<Room>(`${this.url}/${roomNumber}`)
+  }
+
+  getAllRooms(): Observable<Room[]>{
+    return this.http.get<Room[]>(this.url);
   }
 
   searchRoomsAdvanced(
@@ -35,13 +34,8 @@ class RoomService {
     return this.http.get<Room[]>(`${this.url}/search`, { params: params });
   }
 
-
   updateRoom(roomNumber : number, room : Room) : Observable<Room>{
     return this.http.put<Room>(`${this.url}/${roomNumber}`, room)
-  }
-
-  updateRoomState(roomNumber : number, state : RoomState) : Observable<Room>{
-    return this.http.put<Room>(`${this.url}/${roomNumber}/state`, state)
   }
 
 

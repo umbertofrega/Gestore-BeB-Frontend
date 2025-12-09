@@ -39,6 +39,6 @@ export const appConfig: ApplicationConfig = {
     provideKeycloakAngular(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([includeBearerTokenInterceptor])) //
+    provideHttpClient(withInterceptors([includeBearerTokenInterceptor]))
   ]
 };

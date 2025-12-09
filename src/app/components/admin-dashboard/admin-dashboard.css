@@ -94,7 +94,7 @@ h1:first-child {
 }
 
 .btn-prenota:hover {
-  background-color: #3f90e0; var(--primary);
+  background-color: var(--primary);
 }
 
 .btn-logout {
