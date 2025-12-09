@@ -29,9 +29,10 @@ export class Navbar implements OnInit {
       checkin: ['', Validators.required],
       checkout: ['', Validators.required],
       type: [null],
+      maxGuests: [250]
     });
 
-    if(this.keycloak.authenticated)
+    if(this.keycloak.authenticated || !this.isAdmin())
       await this.syncUser()
   }
 
@@ -87,7 +88,6 @@ export class Navbar implements OnInit {
 
   isAdmin(): boolean {
     return this.keycloak.hasRealmRole("RECEPTIONIST") || this.keycloak.hasRealmRole("OWNER");
-
   }
 
   redirectToAdmin(): void {

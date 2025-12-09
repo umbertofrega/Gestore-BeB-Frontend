@@ -1,8 +1,8 @@
 <nav class="navbar">
-  <div class="logo">
-    <a routerLink="/">Gestore B&B</a>
-  </div>
   @if (!isAdmin()) {
+    <div class="logo">
+      <a routerLink="/">Gestore B&B</a>
+    </div>
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="nav-search">
       <div class="search-inputs">
         <input type="date" formControlName="checkin" class="nav-input" title="Data Arrivo">
@@ -15,11 +15,20 @@
           }
         </select>
 
+        <select formControlName="type" class="nav-input" title ="Ospiti">
+          <option [ngValue]="null">Persone</option>
+          @for (type of roomTypes; track type) {
+            <option [value]="type">{{type}}</option>
+          }
+        </select>
+
         <button type="submit" class="btn-base btn-search">Cerca</button>
       </div>
     </form>
   } @else {
-
+    <div class="logo">
+      <a> Gestore B&B</a>
+    </div>
   }
   <ul class="nav-links">
     @if (this.keycloak.authenticated) {
