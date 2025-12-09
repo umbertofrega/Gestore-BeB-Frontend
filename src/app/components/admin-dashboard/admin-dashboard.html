@@ -10,7 +10,7 @@
           <p>{{ room.description }}</p>
           <p class="price">Prezzo: <strong>{{ room.price }} €</strong></p>
           <button class = "btn-logout" (click)="deleteRoom(room.number)"> Elimina camera</button>
-          <button class = "btn-base" (click)="editRoom(room.number)"> Modifica camera</button>
+          <button class = "btn-base" (click)="editRoom(room)"> Modifica camera</button>
         </div>
       </div>
     }

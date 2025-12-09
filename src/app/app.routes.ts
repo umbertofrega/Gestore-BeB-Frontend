@@ -8,9 +8,12 @@ import {AdminDashboard} from './components/admin-dashboard/admin-dashboard';
 export const routes: Routes = [
   { path: '', component: Home },
 
-  { path: 'room/:number', component : RoomDetail, canActivate: [AuthGuard] },
+  { path: 'room/:number', component : RoomDetail, canActivate: [AuthGuard],},
 
-  { path: 'admin' , component: AdminDashboard, canActivate: [AuthGuard] },
+  { path: 'admin' , component: AdminDashboard, canActivate: [AuthGuard], data: {
+      requiredRoles: ['RECEPTIONIST', 'OWNER'] // Array dei ruoli Keycloak
+    }
+    },
 
   { path: 'me', component : Profile, canActivate: [AuthGuard] },
 

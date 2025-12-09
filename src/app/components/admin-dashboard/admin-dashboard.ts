@@ -7,12 +7,16 @@ import {Room} from '../../models/room.model';
 import {Reservation} from '../../models/reservation.model';
 import {DatePipe, NgClass} from '@angular/common';
 import {PaymentStatus} from '../../models/enums/payment-status.model';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
+import {RoomFormDialog} from '../room-form-dialog/room-form-dialog';
 
 @Component({
   selector: 'app-admin-dashboard',
   imports: [
     DatePipe,
-    NgClass
+    NgClass,
+    MatDialogModule
   ],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
@@ -25,15 +29,15 @@ export class AdminDashboard implements OnInit{
   rooms : Room[] = []
   protected readonly PaymentStatus = PaymentStatus;
   reservations : Reservation[] = []
-
+  dialog = inject(MatDialog)
 
   ngOnInit() {
-    this.loadAllGuests();
-    this.loadAllRooms();
-    this.loadAllReservations();
+      this.loadAllGuests();
+      this.loadAllRooms();
+      this.loadAllReservations();
   }
 
-  loadAllGuests(){
+  protected loadAllGuests(){
     this.guestService.getAllGuests().subscribe({
       next: (guestData) => {
         this.guests = guestData;
@@ -42,27 +46,46 @@ export class AdminDashboard implements OnInit{
     })
   }
 
-  addRoom(){
-    /*
-    this.roomService.addRoom(room).subscribe(
-      () => this.loadAllRooms()
-    )
+  protected addRoom(){
+    const dialogRef = this.dialog.open(RoomFormDialog, {
+      width: '600px',
+      data: null
+    });
 
-     */
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.roomService.addRoom(result).subscribe(() => this.loadAllRooms()) ;
+      }
+    });
   }
 
-  deleteRoom(number: number) {
-    this.roomService.deleteRoom(number)
+  protected deleteRoom(number: number) {
+    const matDialogRef = this.dialog.open(ConfirmDialog,{
+      data: { title : "Confermi?" ,message: `Vuoi davvero cancellare la stanza ${number}?`}
+    });
+
+    matDialogRef.afterClosed().subscribe( result => {
+      if(result){
+        this.roomService.deleteRoom(number).subscribe( () => this.loadAllRooms())
+      }
+    })
   }
 
-  editRoom(oldRoom : number){
-    /*
-    this.roomService.updateRoom(oldRoom, newRoom)
-  */
+  protected editRoom(oldRoom : Room){
+    const dialogRef = this.dialog.open(RoomFormDialog, {
+      width: '600px',
+      data: oldRoom
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.roomService.updateRoom(oldRoom.number, result).subscribe(() => this.loadAllRooms());
+      }
+    });
   }
 
 
-  loadAllRooms(){
+  protected loadAllRooms(){
     this.roomService.getAllRooms().subscribe({
       next: (roomData) => {
         this.rooms = roomData;
@@ -71,7 +94,7 @@ export class AdminDashboard implements OnInit{
     })
   }
 
-  loadAllReservations() {
+  protected loadAllReservations() {
     this.reservationService.getAllReservations().subscribe({
       next: (reservationsData) => {
         this.reservations = reservationsData;
@@ -80,7 +103,7 @@ export class AdminDashboard implements OnInit{
     });
   }
 
-  updateReservation(reservationId : number) {
+  protected updateReservation(reservationId: number) {
     this.reservationService.updateStatus(reservationId).subscribe(
       () => this.loadAllReservations()
     )
@@ -104,7 +127,6 @@ export class AdminDashboard implements OnInit{
       error : err => console.error('Errore ricezione ospiti', err)
     })
   }
-
 
 }
 
