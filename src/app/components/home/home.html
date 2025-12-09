@@ -1,17 +1,31 @@
 <div class="container">
-
   <div class="results">
+
     @if (rooms.length === 0) {
       <p>Nessuna stanza da mostrare.</p>
     }
+
     <div class="room-list">
       @for (room of rooms; track room.number) {
         <div class="room-card">
-          <div class="room-info">
-            <a [routerLink]="['/room', room.number]"> </a>
 
+          <div class="room-info">
             <h4>Camera {{ room.number }} - {{ room.name }}</h4>
-            <p class="badge">Camere: {{ room.size }} Letti: {{room.maxGuests }}</p>
+
+            <div class="badge-container">
+
+              <span class="badge" title="Numero di stanze">
+                <mat-icon>meeting_room</mat-icon>
+                {{ room.size }} Locali
+              </span>
+
+              <span class="badge" title="Capienza massima">
+                <mat-icon>person</mat-icon>
+                Max {{ room.maxGuests }}
+              </span>
+
+            </div>
+
             <p>{{ room.description }}</p>
             <p class="price">Prezzo: <strong>{{ room.price }} €</strong></p>
           </div>
@@ -22,12 +36,14 @@
                 [routerLink]="['/room', room.number]"
                 [queryParams]="{
                   checkin: this.route.snapshot.queryParams['checkin'],
-                  checkout: this.route.snapshot.queryParams['checkout']  }"
+                  checkout: this.route.snapshot.queryParams['checkout']
+                }"
                 class="btn-prenota">
                 Prenota
               </button>
             }
           </div>
+
         </div>
       }
     </div>

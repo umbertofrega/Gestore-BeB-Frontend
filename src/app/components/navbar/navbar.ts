@@ -5,12 +5,13 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import {GuestService} from '../../services/guest.service';
 import {Guest} from '../../models/guest.model';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, CommonModule],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule, MatIconModule],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
@@ -26,8 +27,8 @@ export class Navbar implements OnInit {
     this.searchForm = this.fb.group({
       checkin: ['', Validators.required],
       checkout: ['', Validators.required],
-      minSize: ['0'],
-      minGuests: [250]
+      minSize: [null],
+      minGuests: [null]
     });
 
     if(this.keycloak.authenticated || !this.isAdmin())

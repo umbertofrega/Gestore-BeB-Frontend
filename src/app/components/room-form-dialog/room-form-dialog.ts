@@ -38,8 +38,8 @@ export class RoomFormDialog implements OnInit {
     this.roomForm = this.fb.group({
       id: [null],
       number: ['', Validators.required],
-      type: ['', Validators.required],
       name: ['', Validators.required],
+      size: [1, [Validators.required, Validators.min(1)]],
       price: [null, [Validators.required, Validators.min(0)]],
       maxGuests: [2, [Validators.required, Validators.min(1)]],
       description: [''],

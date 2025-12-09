@@ -8,6 +8,8 @@ import {PaymentStatus} from '../../models/enums/payment-status.model';
 import {GuestService} from '../../services/guest.service';
 import {Guest} from '../../models/guest.model';
 import { differenceInDays } from 'date-fns';
+import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -24,6 +26,7 @@ export class RoomDetail implements OnInit{
   guestService : GuestService = inject(GuestService);
   reservation : Reservation | null = null;
   guest : Guest | null = null;
+  dialog = inject(MatDialog)
   private router = inject(Router);
 
   constructor(
@@ -56,7 +59,6 @@ export class RoomDetail implements OnInit{
   }
 
   loadReservation(){
-
     if(this.guest == null) {
       console.error("Errore nella registrazione della prenotazione, utente null")
       return
@@ -92,9 +94,20 @@ export class RoomDetail implements OnInit{
       this.reservationService.addReservation(this.reservation).subscribe({
         next: (res) => {
           console.log('Prenotazione creata con successo:', res);
-          this.router.navigate(['/me']);
+          const matDialogRef = this.dialog.open(ConfirmDialog,{
+            data: { title : "Prenotazione creata con successo!" ,message: `Controlla la casella postale "${this.guest?.email}" per l'email di conferma`}
+          });
+          matDialogRef.afterClosed().subscribe(() => {
+            this.router.navigate(['/me'])
+          }
+          )
         },
-        error: (err) => console.error('Errore nella creazione della prenotazione:', err)
+        error: (err) => {
+          console.error('Errore nella creazione della prenotazione:', err)
+          this.dialog.open(ConfirmDialog,{
+            data: { title : "Errore nella creazine della prenotazione" ,message: `Scusa per il disagio, riprova più tardi!`}
+          });
+        }
       });
     } else {
       console.error("Errore: Impossibile procedere, l'oggetto prenotazione è null.");

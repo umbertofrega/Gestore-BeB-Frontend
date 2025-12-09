@@ -4,11 +4,12 @@ import { RouterLink, ActivatedRoute } from '@angular/router'; // ActivatedRoute 
 import RoomService from '../../services/room.service';
 import { Room } from '../../models/room.model';
 import Keycloak from 'keycloak-js';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MatIconModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
@@ -47,9 +48,9 @@ export class Home implements OnInit {
     this.roomService.searchRoomsAdvanced(
       params['checkin'],
       params['checkout'],
+      params['minGuests'] || 1,
       params['maxPrice'] || 5000,
-      params['minSize'] || 0,
-      params['minGuests'] || 0
+      params['minSize'] || 0
     ).subscribe({
       next: (data) => this.rooms = data,
       error: (err) => {
