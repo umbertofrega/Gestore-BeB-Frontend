@@ -1,15 +1,15 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivateFn, ActivatedRouteSnapshot } from '@angular/router';
 import Keycloak from 'keycloak-js';
 
-export const AuthGuard: CanActivateFn = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const AuthGuard: CanActivateFn = async (route: ActivatedRouteSnapshot) => {
   const keycloak = inject(Keycloak);
 
   const authenticated = keycloak.authenticated;
 
   if (!authenticated) {
     await keycloak.login({
-      redirectUri: window.location.origin + state.url,
+      redirectUri: window.location.origin,
     });
     return false;
   }
