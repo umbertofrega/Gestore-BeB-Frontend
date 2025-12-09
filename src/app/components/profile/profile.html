@@ -2,32 +2,28 @@
 
   @if (guest) {
     <div class="profile-header">
-      <h1 class="welcome-message">Ciao, {{ guest.name }} 👋</h1>
+      <h1>Ciao {{ guest.name }}!</h1>
       <p class="email-info">{{ guest.email }}</p>
     </div>
   }
 
-  <hr class="separator">
-
+  <hr>
   <div class="reservations-section">
     <h2>Le Tue Prenotazioni</h2>
-
     @for (reservation of reservations; track reservation.id) {
       <div  class="reservation-card"
         [ngClass]="{'passed-reservation-card': hasPassed(reservation.checkout)}">
         <div class="card-details">
           <p class="card-title">Prenotazione #{{ reservation.id }}</p>
           <p class="card-room">Stanza: {{reservation.room.number}}, {{ reservation.room.name }}</p>
-
           <div class="dates">
             <span class="date-tag check-in">Check-in: <strong>{{ reservation.checkin | date:'dd/MM/yyyy' }}</strong></span>
             <span class="date-tag check-out">Check-out: <strong>{{ reservation.checkout | date:'dd/MM/yyyy' }}</strong></span>
           </div>
         </div>
-
         <div class="card-status">
-          <span [ngClass]="reservation.paymentStatus">{{ reservation.paymentStatus }}</span>
-          <p class="card-total">Totale: <strong>{{ reservation.price }}$</strong></p>
+          <span class="status-badge" [ngClass]="reservation.paymentStatus"> {{ reservation.paymentStatus }} </span>
+          <p class="card-total">Totale: <strong>{{ reservation.price }}$ </strong></p>
         </div>
         @if (isRevocable(reservation)) {
           <button class="btn-delete" (click)="deleteDilog(reservation.id)"> Revoca </button>

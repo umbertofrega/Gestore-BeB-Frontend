@@ -7,23 +7,14 @@
       <div class="search-inputs">
         <input type="date" formControlName="checkin" class="nav-input" title="Data Arrivo">
         <input type="date" formControlName="checkout" class="nav-input" title="Data Partenza">
-
+        <mat-icon>meeting_room</mat-icon>
         <select formControlName="minSize" class="nav-input">
-          <option [ngValue]="null">Ospiti</option>
+          <option [ngValue]="null">Locali</option>
           <option [ngValue]="1">1</option>
           <option [ngValue]="2">2</option>
-          <option [ngValue]="3">3</option>
-          <option [ngValue]="4">4</option>
-          <option [ngValue]="5">5</option>
-          <option [ngValue]="6">6</option>
-          <option [ngValue]="7">7</option>
-          <option [ngValue]="8">8</option>
-          <option [ngValue]="9">9</option>
-          <option [ngValue]="10">10</option>
-          <option [ngValue]="11">12</option>
-          <option [ngValue]="12">12</option>
+          <option [ngValue]="2">3</option>
         </select>
-
+        <mat-icon>person</mat-icon>
         <select formControlName="minGuests" class="nav-input">
           <option [ngValue]="null">Ospiti</option>
           <option [ngValue]="1">1</option>
@@ -31,13 +22,6 @@
           <option [ngValue]="3">3</option>
           <option [ngValue]="4">4</option>
           <option [ngValue]="5">5</option>
-          <option [ngValue]="6">6</option>
-          <option [ngValue]="7">7</option>
-          <option [ngValue]="8">8</option>
-          <option [ngValue]="9">9</option>
-          <option [ngValue]="10">10</option>
-          <option [ngValue]="11">12</option>
-          <option [ngValue]="12">12</option>
         </select>
 
         <button type="submit" class="btn-base btn-search">Cerca</button>

@@ -1,4 +1,3 @@
-
 .profile-container {
   padding: 20px;
   max-width: 1000px;
@@ -6,32 +5,18 @@
 }
 
 .profile-header {
-  background: var(--bg-surface);
   padding: 30px;
   border-radius: 16px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
   text-align: center;
   margin-bottom: 30px;
-}
-
-.welcome-message {
-  color: var(--text-main);
-  margin: 0 0 10px 0;
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .email-info {
   color: var(--text-muted);
   font-size: 1.1rem;
-}
-
-.separator {
-  border: 0;
-  height: 1px;
-  background: var(--border);
-  margin: 30px 0;
-  opacity: 0.5;
 }
 
 .reservations-section h2 {
@@ -129,24 +114,14 @@
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 1px;
-}
-.CONFIRMED {
+}.PAID {
   background: rgba(76, 175, 80, 0.15);
   color: #4caf50;
   border: 1px solid rgba(76, 175, 80, 0.3);
-}
-
-.PENDING {
+}.PENDING {
   background: rgba(255, 193, 7, 0.15);
   color: #ffc107;
   border: 1px solid rgba(255, 193, 7, 0.3);
-}
-
-.CANCELLED {
-  background: rgba(244, 67, 54, 0.15);
-  color: #f44336;
-  border: 1px solid rgba(244, 67, 54, 0.3);
-  text-decoration: line-through;
 }
 
 .empty-state {
@@ -180,24 +155,18 @@
   background: var(--primary-dark, #3700b3);
 }
 
-@media (max-width: 768px) {
-  .reservation-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
 .btn-delete,
-  .action-delete-button {
-    background: var(--danger);
-    color: var(--text-inverse);
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: background 0.2s, transform 0.1s;
-  }
+.action-delete-button {
+  background: var(--danger);
+  color: var(--text-inverse);
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.1s;
+}
 
 .btn-delete:hover,
   .action-delete-button:hover {
@@ -208,4 +177,3 @@
   .action-delete-button:active {
     transform: translateY(1px);
   }
-}
