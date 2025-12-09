@@ -6,7 +6,7 @@
       <div class="room-card">
         <div class="room-info">
           <h4>Camera {{ room.number }} - {{ room.name }}</h4>
-          <span class="badge">{{ room.type }}</span>
+          <p> Stanze: {{room.size}} Letti: {{room.maxGuests}}</p>
           <p>{{ room.description }}</p>
           <p class="price">Prezzo: <strong>{{ room.price }} €</strong></p>
           <button class = "btn-logout" (click)="deleteRoom(room.number)"> Elimina camera</button>

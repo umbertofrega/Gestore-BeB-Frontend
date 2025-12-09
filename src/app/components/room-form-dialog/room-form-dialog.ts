@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import {RoomState} from '../../models/enums/room-types.model';
+import {RoomState} from '../../models/enums/room-state.model';
 
 @Component({
   selector: 'app-room-form-dialog',

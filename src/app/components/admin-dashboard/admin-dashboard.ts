@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {GuestService} from '../../services/guest.service';
 import {ReservationService} from '../../services/reservation.service';
-import {RoomService} from '../../services/room.service';
+import RoomService from '../../services/room.service';
 import {Guest} from '../../models/guest.model';
 import {Room} from '../../models/room.model';
 import {Reservation} from '../../models/reservation.model';

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router'; // ActivatedRoute serve per leggere l'URL
-import { RoomService } from '../../services/room.service';
+import RoomService from '../../services/room.service';
 import { Room } from '../../models/room.model';
 import Keycloak from 'keycloak-js';
 
@@ -44,14 +44,12 @@ export class Home implements OnInit {
   performSearch(params: any) {
     console.log("Parametri ricevuti dalla Navbar:", params);
 
-    const typesToSend = params['type'] ? [params['type']] : [];
-
     this.roomService.searchRoomsAdvanced(
       params['checkin'],
       params['checkout'],
-      typesToSend,
       params['maxPrice'] || 5000,
-      params['minSize'] || 0
+      params['minSize'] || 0,
+      params['minGuests'] || 0
     ).subscribe({
       next: (data) => this.rooms = data,
       error: (err) => {

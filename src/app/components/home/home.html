@@ -11,7 +11,7 @@
             <a [routerLink]="['/room', room.number]"> </a>
 
             <h4>Camera {{ room.number }} - {{ room.name }}</h4>
-            <span class="badge">{{ room.type }}</span>
+            <p class="badge">Camere: {{ room.size }} Letti: {{room.maxGuests }}</p>
             <p>{{ room.description }}</p>
             <p class="price">Prezzo: <strong>{{ room.price }} €</strong></p>
           </div>

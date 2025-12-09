@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Room} from '../models/room.model';
 import {Observable} from 'rxjs';
-import {RoomState, RoomType} from '../models/enums/room-types.model';
+import {RoomState} from '../models/enums/room-state.model';
 
 @Injectable({ providedIn: 'root' })
-export class RoomService {
+class RoomService {
   private url = "http://localhost:8080/api/rooms"
 
   constructor(private http: HttpClient) {}
@@ -23,21 +23,14 @@ export class RoomService {
   }
 
   searchRoomsAdvanced(
-    checkin: string,
-    checkout: string,
-    types: RoomType[],
-    maxPrice: number,
-    minSize: number
-  ): Observable<Room[]> {
+    checkin: string, checkout: string, minGuests: number, maxPrice: number, minSize: number  ): Observable<Room[]> {
 
     let params = new HttpParams()
       .set('checkin', checkin)
       .set('checkout', checkout)
       .set('maxPrice', maxPrice.toString())
-      .set('minSize', minSize.toString());
-
-    const typeStrings = types.join(',');
-    params = params.set('type', typeStrings);
+      .set('minSize', minSize.toString())
+      .set('minGuests', minGuests.toString());
 
     return this.http.get<Room[]>(`${this.url}/search`, { params: params });
   }
@@ -56,3 +49,5 @@ export class RoomService {
     return this.http.delete<Room>(`${this.url}/${roomNumber}`)
   }
 }
+
+export default RoomService

@@ -2,7 +2,6 @@ import {Component, OnInit, inject} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import Keycloak from 'keycloak-js';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RoomType } from '../../models/enums/room-types.model';
 import { CommonModule } from '@angular/common';
 import {GuestService} from '../../services/guest.service';
 import {Guest} from '../../models/guest.model';
@@ -19,7 +18,6 @@ export class Navbar implements OnInit {
   guest : Guest | null = null;
   searchForm!: FormGroup;
   guestService = inject(GuestService)
-  roomTypes = Object.values(RoomType);
   readonly keycloak = inject(Keycloak);
   private router = inject(Router);
   private fb = inject(FormBuilder);
@@ -28,8 +26,8 @@ export class Navbar implements OnInit {
     this.searchForm = this.fb.group({
       checkin: ['', Validators.required],
       checkout: ['', Validators.required],
-      type: [null],
-      maxGuests: [250]
+      minSize: ['0'],
+      minGuests: [250]
     });
 
     if(this.keycloak.authenticated || !this.isAdmin())
