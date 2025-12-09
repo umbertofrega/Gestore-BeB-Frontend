@@ -30,7 +30,7 @@
           <p class="card-total">Totale: <strong>{{ reservation.price }}$</strong></p>
         </div>
         @if (isRevocable(reservation)) {
-          <button class="btn-delete" (click)="deleteReservation(reservation.id)"> Revoca </button>
+          <button class="btn-delete" (click)="deleteDilog(reservation.id)"> Revoca </button>
         }
       </div>
     }

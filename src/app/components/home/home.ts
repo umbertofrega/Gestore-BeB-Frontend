@@ -50,7 +50,7 @@ export class Home implements OnInit {
       params['checkin'],
       params['checkout'],
       typesToSend,
-      params['maxPrice'] || 500,
+      params['maxPrice'] || 5000,
       params['minSize'] || 0
     ).subscribe({
       next: (data) => this.rooms = data,
