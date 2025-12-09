@@ -1,0 +1,87 @@
+<h2 mat-dialog-title>
+  @if (isEditMode) {
+    Modifica Camera
+  } @else {
+    Nuova Camera
+  }
+</h2>
+<div>  </div>
+<mat-dialog-content>
+  <form [formGroup]="roomForm" class="dialog-form">
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Numero Camera</mat-label>
+        <input matInput type="number" formControlName="number" placeholder="Es. 101">
+
+        @if (roomForm.get('number')?.hasError('required')) {
+          <mat-error>Obbligatorio</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Tipologia</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="SINGLE">Singola</mat-option>
+          <mat-option value="DOUBLE">Doppia</mat-option>
+          <mat-option value="TRIPLE">Tripla</mat-option>
+          <mat-option value="FAMILY">Family</mat-option>
+        </mat-select>
+
+        @if (roomForm.get('type')?.hasError('required')) {
+          <mat-error>Seleziona tipo</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome (Marketing)</mat-label>
+      <input matInput formControlName="name" placeholder="Es. Suite Vista Mare">
+
+      @if (roomForm.get('name')?.hasError('required')) {
+        <mat-error>Inserisci un nome</mat-error>
+      }
+    </mat-form-field>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Prezzo / Notte</mat-label>
+        <input matInput type="number" formControlName="price" min="0" step="0.50">
+        <span matTextPrefix>€&nbsp;</span>
+
+        @if (roomForm.get('price')?.hasError('required')) {
+          <mat-error>Prezzo mancante</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Max Ospiti</mat-label>
+        <input matInput type="number" formControlName="maxGuests" min="1">
+        <mat-icon matSuffix>group</mat-icon>
+
+        @if (roomForm.get('maxGuests')?.hasError('min')) {
+          <mat-error>Minimo 1</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descrizione</mat-label>
+      <textarea matInput formControlName="description" rows="3" placeholder="Dettagli aggiuntivi..."></textarea>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Annulla</button>
+
+  <button mat-flat-button color="primary"
+          [disabled]="roomForm.invalid"
+          (click)="save()">
+    @if (isEditMode) {
+      Aggiorna
+    } @else {
+      Crea
+    }
+  </button>
+</mat-dialog-actions>
