@@ -26,24 +26,27 @@ export class AdminDashboard implements OnInit{
   reservationService = inject(ReservationService)
   roomService = inject(RoomService)
   guests : Guest[] = []
+  guestRooms : Map<Guest,Room|null> = new Map()
   rooms : Room[] = []
   protected readonly PaymentStatus = PaymentStatus;
   reservations : Reservation[] = []
   dialog = inject(MatDialog)
 
   ngOnInit() {
-      this.loadAllGuests();
-      this.loadAllRooms();
-      this.loadAllReservations();
+    this.loadAllGuests();
+    this.loadAllRooms();
+    this.loadAllReservations();
   }
 
   protected loadAllGuests(){
     this.guestService.getAllGuests().subscribe({
       next: (guestData) => {
         this.guests = guestData;
+        this.loadAllGuestRooms()
       },
       error : err => console.error('Errore ricezione ospiti', err)
     })
+
   }
 
   protected addRoom(){
@@ -54,7 +57,11 @@ export class AdminDashboard implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.roomService.addRoom(result).subscribe(() => this.loadAllRooms()) ;
+        this.roomService.addRoom(result).subscribe(() => {
+          this.loadAllRooms()
+          this.dialog.open(ConfirmDialog,{
+            data:{title: "Operazione svolta", message:"Aggiunta della stanza avvenuta con successo"}})
+         });
       }
     });
   }
@@ -128,5 +135,22 @@ export class AdminDashboard implements OnInit{
     })
   }
 
+  protected loadAllGuestRooms() {
+    for (let g of this.guests) {
+      console.log(`Richiedo stanza per ${g.name}...`);
+
+      this.guestService.getRoom(g).subscribe({
+        next: (room: Room) => {
+          console.log(`Stanza trovata per ${g.name}:`, room);
+
+          this.guestRooms.set(g, room);
+        },
+        error: (err) => {
+          console.log(`Nessuna stanza attiva per ${g.name}`, err);
+          this.guestRooms.set(g, null);
+        }
+      });
+    }
+  }
 }
 

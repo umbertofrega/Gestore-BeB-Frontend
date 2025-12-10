@@ -24,6 +24,9 @@
         <div class="room-info">
           <h4> Ospite {{guest.id}} - {{guest.name}} </h4>
           <p> Email: {{guest.email}} </p>
+          @if(this.guestRooms.get(guest)) {
+            <p> <strong> In stanza: {{this.guestRooms.get(guest)?.number}}</strong> </p>
+          }
         </div>
       </div>
     }
@@ -43,8 +46,8 @@
             <span class="date-tag check-out">Check-out: <strong>{{ reservation.checkout | date:'dd/MM/yyyy' }}</strong></span>
           </div>
           <div class="card-status">
-            <span [ngClass]="reservation.paymentStatus">{{ reservation.paymentStatus }}</span>
-            <p class="card-total">Totale: <strong>{{ reservation.price }}$</strong></p>
+            <span [ngClass]="reservation.paymentStatus">{{ reservation.paymentStatus.toString() }}</span>
+            <p class="card-total">Totale: <strong>{{ reservation.price }}€</strong></p>
           </div>
           @if (reservation.id && reservation.paymentStatus == PaymentStatus.PENDING) {
             <button (click)="updateReservation(reservation.id)"> Segna come pagato </button>
