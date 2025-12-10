@@ -5,8 +5,8 @@
     </div>
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="nav-search">
       <div class="search-inputs">
-        <input type="date" formControlName="checkin" class="nav-input" title="Data Arrivo">
-        <input type="date" formControlName="checkout" class="nav-input" title="Data Partenza">
+        <input type="date" formControlName="checkin" class="nav-input" title="Data Arrivo" [min] = "dateToString(today)" [max] = "dateToString(nextYear)" >
+        <input type="date" formControlName="checkout" class="nav-input" title="Data Partenza" [min] ="dateToString(today)" [max] = "dateToString(nextYear)">
         <mat-icon>meeting_room</mat-icon>
         <select formControlName="minSize" class="nav-input">
           <option [ngValue]="null">Locali</option>
