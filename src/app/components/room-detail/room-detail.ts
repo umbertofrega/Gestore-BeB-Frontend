@@ -104,9 +104,15 @@ export class RoomDetail implements OnInit{
         },
         error: (err) => {
           console.error('Errore nella creazione della prenotazione:', err)
-          this.dialog.open(ConfirmDialog,{
+          if(err.status == 409) {
+            this.dialog.open(ConfirmDialog,{
+              data: { title : "Errore nella creazine della prenotazione" ,message: `Hai già una prenotazione che si sovrappone in quel periodo!`}
+            });
+          } else {
+            this.dialog.open(ConfirmDialog,{
             data: { title : "Errore nella creazine della prenotazione" ,message: `Scusa per il disagio, riprova più tardi!`}
           });
+        }
         }
       });
     } else {

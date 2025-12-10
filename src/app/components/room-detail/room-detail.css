@@ -116,6 +116,10 @@
   background-color: #3cb46e;
 }
 
+.form-row{
+  padding: 40px
+}
+
 .btn-prenota:active {
   transform: translateY(1px);
 }
