@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Guest} from '../models/guest.model';
 import {Reservation} from '../models/reservation.model';
+import {Room} from '../models/room.model';
 
 @Injectable({ providedIn : 'root' })
 export class GuestService{
@@ -29,5 +30,9 @@ export class GuestService{
 
   getInHouse() : Observable<Guest[]>{
     return this.http.get<Guest[]>(`${this.url}/inHouse`)
+  }
+
+  getRoom(guest: Guest) {
+    return this.http.get<Room>(`${this.url}/${guest.id}/room`)
   }
 }
