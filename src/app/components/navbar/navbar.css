@@ -57,11 +57,6 @@
   font-size: 0.9rem;
 }
 
-.nav-input::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  cursor: pointer;
-}
-
 .btn-base {
   padding: 8px 20px;
   border: none;
