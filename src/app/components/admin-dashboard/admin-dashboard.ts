@@ -47,17 +47,6 @@ export class AdminDashboard implements OnInit{
     }
   }
 
-  protected loadAllGuests(){
-    this.guestService.getAllGuests().subscribe({
-      next: (guestData) => {
-        this.guests = guestData;
-        this.loadAllGuestRooms()
-      },
-      error : err => console.error('Errore ricezione ospiti', err)
-    })
-
-  }
-
   protected addRoom(){
     const dialogRef = this.dialog.open(RoomFormDialog, {
       width: '600px',
@@ -139,10 +128,24 @@ export class AdminDashboard implements OnInit{
     this.guestService.getInHouse().subscribe({
       next: (guestData) => {
         this.guests = guestData;
+        this.loadAllGuestRooms()
       },
       error : err => console.error('Errore ricezione ospiti', err)
     })
   }
+
+
+  protected loadAllGuests(){
+    this.guestService.getAllGuests().subscribe({
+      next: (guestData) => {
+        this.guests = guestData;
+        this.loadAllGuestRooms()
+      },
+      error : err => console.error('Errore ricezione ospiti', err)
+    })
+
+  }
+
 
   protected loadAllGuestRooms() {
     for (let g of this.guests) {
@@ -180,7 +183,7 @@ export class AdminDashboard implements OnInit{
         role: role
       };
 
-      this.adminService.registerAdmin(newAdmin)
+      this.adminService.registerAdmin(newAdmin).subscribe()
     } catch (e) {
       console.error('Errore nel caricamento profilo:', e);
     }

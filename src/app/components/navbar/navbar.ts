@@ -36,7 +36,7 @@ export class Navbar implements OnInit {
       minGuests: [null]
     });
 
-    if(this.keycloak.authenticated && !this.isAdmin())
+    if(this.keycloak.authenticated)
       await this.syncUser()
   }
 
@@ -89,28 +89,31 @@ export class Navbar implements OnInit {
     }
 
   async syncUser() {
-    try {
-      const profile = await this.keycloak.loadUserProfile();
+    if(!this.isAdmin()){
+      try {
+        const profile = await this.keycloak.loadUserProfile();
 
-      const newGuest: Guest = {
-        id: 0,
-        code: this.keycloak.subject!,
-        name: `${profile.firstName} ${profile.lastName}`,
-        email: profile.email!
-      };
+        const newGuest: Guest = {
+          id: 0,
+          code: this.keycloak.subject!,
+          name: `${profile.firstName} ${profile.lastName}`,
+          email: profile.email!
+        };
 
-      this.guest = newGuest
-      this.guestService.registerGuest(newGuest).subscribe({
-        next: (res) => console.log('Utente salvato nel DB:', res),
-        error: (err) => {
-          if (err.status === 409) console.log('Utente già esistente.');
-        }
-      });
+        this.guest = newGuest
+        this.guestService.registerGuest(newGuest).subscribe({
+          next: (res) => console.log('Utente salvato nel DB:', res),
+          error: (err) => {
+            if (err.status === 409) console.log('Utente già esistente.');
+          }
+        });
 
-    } catch (e) {
-      console.error('Errore nel caricamento profilo:', e);
+      } catch (e) {
+        console.error('Errore nel caricamento profilo:', e);
+      }
+    } else {
+      this.redirectToAdmin()
     }
-    this.redirectToAdmin()
   }
 
    async register(){
