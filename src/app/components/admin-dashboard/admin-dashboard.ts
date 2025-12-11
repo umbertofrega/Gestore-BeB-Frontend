@@ -10,6 +10,10 @@ import {PaymentStatus} from '../../models/enums/payment-status.model';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
 import {RoomFormDialog} from '../room-form-dialog/room-form-dialog';
+import Keycloak from 'keycloak-js';
+import {AdminService} from '../../services/admin.service';
+import {Admin} from '../../models/admin.model';
+import {AdminRole} from '../../models/enums/admin-role.model';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -23,6 +27,7 @@ import {RoomFormDialog} from '../room-form-dialog/room-form-dialog';
 })
 export class AdminDashboard implements OnInit{
   guestService = inject(GuestService)
+  adminService = inject(AdminService)
   reservationService = inject(ReservationService)
   roomService = inject(RoomService)
   guests : Guest[] = []
@@ -30,12 +35,16 @@ export class AdminDashboard implements OnInit{
   rooms : Room[] = []
   protected readonly PaymentStatus = PaymentStatus;
   reservations : Reservation[] = []
+  keycloak = inject(Keycloak)
   dialog = inject(MatDialog)
 
   ngOnInit() {
-    this.loadAllGuests();
-    this.loadAllRooms();
-    this.loadAllReservations();
+    if(this.keycloak.authenticated && (this.keycloak.hasRealmRole("OWNER") || this.keycloak.hasRealmRole("RECEPTIONIST"))){
+      this.loadAllGuests();
+      this.loadAllRooms();
+      this.loadAllReservations();
+      this.addAdmin()
+    }
   }
 
   protected loadAllGuests(){
@@ -152,5 +161,30 @@ export class AdminDashboard implements OnInit{
       });
     }
   }
+
+  async addAdmin() {
+    try {
+      const profile = await this.keycloak.loadUserProfile()
+
+      let role = AdminRole.RECEPTIONIST
+
+      if(this.keycloak.hasRealmRole("OWNER"))
+        role = AdminRole.OWNER
+
+
+      const newAdmin: Admin = {
+        id: 0,
+        code: this.keycloak.subject!,
+        name: `${profile.firstName} ${profile.lastName}`,
+        email: profile.email!,
+        role: role
+      };
+
+      this.adminService.registerAdmin(newAdmin)
+    } catch (e) {
+      console.error('Errore nel caricamento profilo:', e);
+    }
+  }
 }
+
 
